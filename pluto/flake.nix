@@ -13,22 +13,15 @@
       system: let
         pkgs = nixpkgs.legacyPackages.${system};
         julia = pkgs.julia-bin;
-        buildInputs = with pkgs; ([
-            julia-bin
-          ]
-          ++ (with python311Packages; [
-            notebook
-            jupyter-console
-            jupyter-core
-            jupyterlab
-          ]));
+        buildInputs = with pkgs; [
+          julia-bin
+        ];
         def = with pkgs;
           mkShell {
             inherit buildInputs;
             phases = [];
             shellHook = ''
-              # What is going on here
-              alias irun="${self.packages.${system}.default}/bin/ijulia"
+              alias irun="${self.packages.${system}.default}/bin/pluto"
             '';
           };
       in {
@@ -36,22 +29,26 @@
           default = def;
         };
 
-        packages.default = pkgs.writeScriptBin "ijulia" ''
+        packages.default = pkgs.writeScriptBin "pluto" ''
           ${julia}/bin/julia -e '
           using Pkg
           Pkg.activate(".")
-          if !haskey(Pkg.project().dependencies, "IJulia")
-            Pkg.add("IJulia")
+          if !haskey(Pkg.project().dependencies, "Pluto")
+            Pkg.add("Pluto")
           end
-          using IJulia
-          IJulia.jupyterlab(dir=pwd())
+
+          using Pluto
+          Pluto.run(
+              auto_reload_from_file=true,
+              launch_browser=false
+          )
           '
         '';
 
         # An app that uses the `runme` package
         apps.default = {
           type = "app";
-          program = "${self.packages.${system}.default}/bin/ijulia";
+          program = "${self.packages.${system}.default}/bin/pluto";
         };
       }
     );
