@@ -30,7 +30,7 @@
         devShells = {
           default = def;
           shellHook = ''
-            echo shell hook yay
+            # What is going on here
           '';
         };
 
@@ -38,6 +38,9 @@
           ${julia}/bin/julia -e "
           using Pkg
           Pkg.activate(\".\")
+          if !haskey(Pkg.project().dependencies, "IJulia")
+            Pkg.add("IJulia")
+          end
           using IJulia
           IJulia.jupyterlab(dir=pwd())
           "
