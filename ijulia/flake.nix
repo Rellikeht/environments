@@ -25,25 +25,27 @@
         def = with pkgs;
           mkShell {
             inherit buildInputs;
+            phases = [];
+            shellHook = ''
+              # What is going on here
+              alias run="${self.packages.${system}.default}/bin/ijulia"
+            '';
           };
       in {
         devShells = {
           default = def;
-          shellHook = ''
-            # What is going on here
-          '';
         };
 
         packages.default = pkgs.writeScriptBin "ijulia" ''
-          ${julia}/bin/julia -e "
+          ${julia}/bin/julia -e '
           using Pkg
-          Pkg.activate(\".\")
+          Pkg.activate(".")
           if !haskey(Pkg.project().dependencies, "IJulia")
             Pkg.add("IJulia")
           end
           using IJulia
           IJulia.jupyterlab(dir=pwd())
-          "
+          '
         '';
 
         # An app that uses the `runme` package
