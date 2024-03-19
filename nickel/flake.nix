@@ -14,14 +14,14 @@
         pkgs = nixpkgs.legacyPackages.${system};
         julia = pkgs.julia-bin;
         buildInputs = with pkgs; [
-          julia-bin
+          nickel
+          nls
         ];
         def = with pkgs;
           mkShell {
             inherit buildInputs;
             phases = [];
             shellHook = ''
-              alias irun="${self.packages.${system}.default}/bin/pluto"
             '';
           };
       in {
@@ -29,25 +29,9 @@
           default = def;
         };
 
-        packages.default = pkgs.writeScriptBin "pluto" ''
-          ${julia}/bin/julia -e '
-          using Pkg
-          Pkg.activate(".")
-          if !haskey(Pkg.project().dependencies, "Pluto")
-            Pkg.add("Pluto")
-          end
-
-          using Pluto
-          Pluto.run(
-              auto_reload_from_file=true,
-              launch_browser=false
-          )
-          '
-        '';
-
         apps.default = {
           type = "app";
-          program = "${self.packages.${system}.default}/bin/pluto";
+          program = "";
         };
       }
     );

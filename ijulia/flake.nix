@@ -48,7 +48,6 @@
           '
         '';
 
-        # An app that uses the `runme` package
         apps.default = {
           type = "app";
           program = "${self.packages.${system}.default}/bin/ijulia";
