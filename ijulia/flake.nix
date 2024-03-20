@@ -26,14 +26,15 @@
           mkShell {
             inherit buildInputs;
 
-            phases = [
-              "run"
+            phases = [];
+            packages = [
+              # ez
+              self.packages.${system}.default
             ];
 
-            run = "${self.packages.${system}.default}/bin/ijulia";
             shellHook = ''
               # What is going on here
-              alias irun="${self.packages.${system}.default}/bin/ijulia"
+              # alias irun="${self.packages.${system}.default}/bin/ijulia"
             '';
           };
       in {

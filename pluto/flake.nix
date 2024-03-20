@@ -20,9 +20,8 @@
           mkShell {
             inherit buildInputs;
             phases = [];
-            shellHook = ''
-              alias irun="${self.packages.${system}.default}/bin/pluto"
-            '';
+            packages = [self.packages.${system}.default];
+            shellHook = '''';
           };
       in {
         devShells = {
