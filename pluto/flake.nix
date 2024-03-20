@@ -13,40 +13,50 @@
       system: let
         pkgs = nixpkgs.legacyPackages.${system};
         julia = pkgs.julia-bin;
-        buildInputs = with pkgs; [
-          julia-bin
-        ];
-        def = with pkgs;
+        packages =
+          [julia]
+          ++ (with pkgs; [
+            ])
+          ++ (
+            with self.packages.${system}; [
+              run
+            ]
+          );
+
+        default = with pkgs;
           mkShell {
-            inherit buildInputs;
+            inherit packages;
             phases = [];
-            packages = [self.packages.${system}.default];
             shellHook = '''';
           };
       in {
-        devShells = {
-          default = def;
+        devShells = {inherit default;};
+
+        packages = rec {
+          run = pkgs.writeScriptBin "pluto" ''
+            ${julia}/bin/julia -e '
+            using Pkg
+            Pkg.activate(".")
+            if !haskey(Pkg.project().dependencies, "Pluto")
+              Pkg.add("Pluto")
+            end
+
+            using Pluto
+            Pluto.run(
+                auto_reload_from_file=true,
+                launch_browser=false
+            )
+            '
+          '';
+          default = run;
         };
 
-        packages.default = pkgs.writeScriptBin "pluto" ''
-          ${julia}/bin/julia -e '
-          using Pkg
-          Pkg.activate(".")
-          if !haskey(Pkg.project().dependencies, "Pluto")
-            Pkg.add("Pluto")
-          end
-
-          using Pluto
-          Pluto.run(
-              auto_reload_from_file=true,
-              launch_browser=false
-          )
-          '
-        '';
-
-        apps.default = {
-          type = "app";
-          program = "${self.packages.${system}.default}/bin/pluto";
+        apps = rec {
+          run = {
+            type = "app";
+            program = "${self.packages.${system}.run}/bin/pluto";
+          };
+          default = run;
         };
       }
     );

@@ -12,22 +12,39 @@
     flakeUtils.lib.eachDefaultSystem (
       system: let
         pkgs = nixpkgs.legacyPackages.${system};
-        julia = pkgs.julia-bin;
+
+        python = pkgs.python311.withPackages (ps:
+          with ps; [
+            notebook
+            jupyter-console
+            jupyter-core
+            jupyterlab
+            ipykernel
+
+            ipython
+            bpython
+            pip
+            python-lsp-server
+            mypy
+            pylsp-mypy
+            pynvim
+
+            matplotlib
+            numpy
+            pandas
+            sympy
+          ]);
 
         packages =
-          [julia]
-          ++ (with pkgs; ([]
-            ++ (with python311Packages; [
-              notebook
-              jupyter-console
-              jupyter-core
-              jupyterlab
-            ])))
+          [python]
           ++ (with self.packages.${system}; [
-            # ez
             run
             list
             stop
+          ])
+          ++ (with pkgs; [
+            ruff
+            # pylyzer
           ]);
 
         default = with pkgs;
@@ -40,27 +57,17 @@
         devShells = {inherit default;};
 
         packages = rec {
-          run = pkgs.writeScriptBin "ijulia" ''
-            ${julia}/bin/julia -e '
-            using Pkg
-            Pkg.activate(".")
-            if !haskey(Pkg.project().dependencies, "IJulia")
-              Pkg.add("IJulia")
-            end
-            using IJulia
-            IJulia.jupyterlab(dir=pwd())
-            '
-          '';
+          run = pkgs.writeScriptBin "ipyrun" '''';
 
+          default = run;
           list = pkgs.writeScriptBin "list" ''jupyter server list'';
           stop = pkgs.writeScriptBin "stop" ''jupyter server stop'';
-          default = run;
         };
 
         apps = rec {
           run = {
             type = "app";
-            program = "${self.packages.${system}.run}/bin/ijulia";
+            program = "${self.packages.${system}.run}/bin/ipyrun";
           };
           default = run;
         };
