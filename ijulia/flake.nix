@@ -25,7 +25,12 @@
         def = with pkgs;
           mkShell {
             inherit buildInputs;
-            phases = [];
+
+            phases = [
+              "run"
+            ];
+
+            run = "${self.packages.${system}.default}/bin/ijulia";
             shellHook = ''
               # What is going on here
               alias irun="${self.packages.${system}.default}/bin/ijulia"
