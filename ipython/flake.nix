@@ -19,6 +19,7 @@
             jupyter-console
             jupyter-core
             jupyterlab
+            nbconvert
             ipykernel
 
             ipython

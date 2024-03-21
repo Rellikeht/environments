@@ -22,6 +22,7 @@
               jupyter-console
               jupyter-core
               jupyterlab
+              nbconvert
             ])))
           ++ (with self.packages.${system}; [
             # ez
