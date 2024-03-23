@@ -16,7 +16,52 @@
 
         packages =
           [julia]
-          ++ (with pkgs; ([]
+          ++ (with pkgs; ([
+              inkscape
+              pandoc
+              (texlive.combine {
+                inherit
+                  (pkgs.texlive)
+                  tcolorbox
+                  environ
+                  pdfcol
+                  upquote
+                  adjustbox
+                  scheme-medium
+                  # scheme-small
+                  
+                  caption
+                  collectbox
+                  enumitem
+                  eurosym
+                  etoolbox
+                  jknapltx
+                  parskip
+                  pgf
+                  rsfs
+                  titling
+                  trimspaces
+                  ucs
+                  ulem
+                  ltxcmds
+                  infwarerr
+                  iftex
+                  kvoptions
+                  kvsetkeys
+                  float
+                  geometry
+                  amsmath
+                  fontspec
+                  unicode-math
+                  fancyvrb
+                  grffile
+                  hyperref
+                  booktabs
+                  soul
+                  ec
+                  ;
+              })
+            ]
             ++ (with python311Packages; [
               notebook
               jupyter-console
