@@ -40,6 +40,7 @@
           [python]
           ++ (with self.packages.${system}; [
             run
+            serv
             list
             stop
           ])
@@ -61,6 +62,7 @@
           run = pkgs.writeScriptBin "ipyrun" '''';
 
           default = run;
+          serv = pkgs.writeScriptBin "serv" ''jupyter server $@'';
           list = pkgs.writeScriptBin "list" ''jupyter server list'';
           stop = pkgs.writeScriptBin "stop" ''jupyter server stop'';
         };

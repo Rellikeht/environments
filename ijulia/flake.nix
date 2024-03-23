@@ -27,6 +27,7 @@
           ++ (with self.packages.${system}; [
             # ez
             run
+            serv
             list
             stop
           ]);
@@ -53,6 +54,7 @@
             '
           '';
 
+          serv = pkgs.writeScriptBin "serv" ''jupyter server $@'';
           list = pkgs.writeScriptBin "list" ''jupyter server list'';
           stop = pkgs.writeScriptBin "stop" ''jupyter server stop'';
           default = run;
