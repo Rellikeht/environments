@@ -17,13 +17,6 @@
       stop
     ]);
 
-  defaultShell = packages:
-    pkgs.mkShell {
-      inherit packages;
-      phases = [];
-      shellHook = '''';
-    };
-
   out-packages = {
     serv = pkgs.writeScriptBin "serv" ''jupyter server $@'';
     list = pkgs.writeScriptBin "list" ''jupyter server list'';

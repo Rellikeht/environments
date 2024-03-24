@@ -13,18 +13,13 @@
       system: let
         pkgs = nixpkgs.legacyPackages.${system};
         common = import ../jupyter.nix {inherit pkgs;};
+        utils = import ../utils.nix {inherit pkgs;};
 
         python = pkgs.python311.withPackages (ps:
           (common.python-packages ps)
           ++ (with ps; [
             ipykernel
             ipython
-            bpython
-            pip
-            python-lsp-server
-            mypy
-            pylsp-mypy
-            pynvim
 
             matplotlib
             numpy
@@ -39,12 +34,10 @@
             run
           ])
           ++ (with pkgs; [
-            ruff
-            # pylyzer
-          ]);
+            ]);
       in {
         devShells = {
-          default = common.defaultShell packages;
+          default = utils.defaultShell packages;
         };
 
         packages =

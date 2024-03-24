@@ -13,6 +13,8 @@
       system: let
         pkgs = nixpkgs.legacyPackages.${system};
         common = import ../jupyter.nix {inherit pkgs;};
+        utils = import ../utils.nix {inherit pkgs;};
+
         julia = pkgs.julia-bin;
         packages =
           common.shell-packages
@@ -25,7 +27,7 @@
           ]);
       in {
         devShells = {
-          default = common.defaultShell packages;
+          default = utils.defaultShell packages;
         };
 
         packages =

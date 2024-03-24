@@ -12,6 +12,8 @@
     flakeUtils.lib.eachDefaultSystem (
       system: let
         pkgs = nixpkgs.legacyPackages.${system};
+        utils = import ../utils.nix {inherit pkgs;};
+
         julia = pkgs.julia-bin;
         packages =
           [julia]
@@ -22,15 +24,10 @@
               run
             ]
           );
-
-        default = with pkgs;
-          mkShell {
-            inherit packages;
-            phases = [];
-            shellHook = '''';
-          };
       in {
-        devShells = {inherit default;};
+        devShells = {
+          default = utils.defaultShell packages;
+        };
 
         packages = rec {
           run = pkgs.writeScriptBin "pluto" ''
