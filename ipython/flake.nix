@@ -12,17 +12,12 @@
     flakeUtils.lib.eachDefaultSystem (
       system: let
         pkgs = nixpkgs.legacyPackages.${system};
+        common = import ../jupyter.nix {inherit pkgs;};
 
         python = pkgs.python311.withPackages (ps:
-          with ps; [
-            notebook
-            jupyter-console
-            jupyter-core
-            jupyterlab
-            jupyterlab-lsp
-            nbconvert
+          (common.python-packages ps)
+          ++ (with ps; [
             ipykernel
-
             ipython
             bpython
             pip
@@ -35,38 +30,29 @@
             numpy
             pandas
             sympy
-          ]);
+          ]));
 
         packages =
-          [python]
+          common.shell-packages
+          ++ [python]
           ++ (with self.packages.${system}; [
             run
-            serv
-            list
-            stop
           ])
           ++ (with pkgs; [
             ruff
             # pylyzer
           ]);
-
-        default = with pkgs;
-          mkShell {
-            inherit packages;
-            phases = [];
-            shellHook = '''';
-          };
       in {
-        devShells = {inherit default;};
-
-        packages = rec {
-          run = pkgs.writeScriptBin "ipyrun" '''';
-
-          default = run;
-          serv = pkgs.writeScriptBin "serv" ''jupyter server $@'';
-          list = pkgs.writeScriptBin "list" ''jupyter server list'';
-          stop = pkgs.writeScriptBin "stop" ''jupyter server stop'';
+        devShells = {
+          default = common.defaultShell packages;
         };
+
+        packages =
+          rec {
+            run = pkgs.writeScriptBin "ipyrun" ''echo "TODO :<"'';
+            default = run;
+          }
+          // common.out-packages;
 
         apps = rec {
           run = {

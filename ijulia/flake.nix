@@ -12,99 +12,38 @@
     flakeUtils.lib.eachDefaultSystem (
       system: let
         pkgs = nixpkgs.legacyPackages.${system};
+        common = import ../jupyter.nix {inherit pkgs;};
         julia = pkgs.julia-bin;
+        packages =
+          common.shell-packages
+          ++ [
+            julia
+          ]
+          ++ (common.python-packages pkgs.python311Packages)
+          ++ (with self.packages.${system}; [
+            run
+          ]);
+      in {
+        devShells = {
+          default = common.defaultShell packages;
+        };
 
         packages =
-          [julia]
-          ++ (with pkgs; ([
-              inkscape
-              pandoc
-              (texlive.combine {
-                inherit
-                  (pkgs.texlive)
-                  tcolorbox
-                  environ
-                  pdfcol
-                  upquote
-                  adjustbox
-                  scheme-medium
-                  # scheme-small
-                  
-                  caption
-                  collectbox
-                  enumitem
-                  eurosym
-                  etoolbox
-                  jknapltx
-                  parskip
-                  pgf
-                  rsfs
-                  titling
-                  trimspaces
-                  ucs
-                  ulem
-                  ltxcmds
-                  infwarerr
-                  iftex
-                  kvoptions
-                  kvsetkeys
-                  float
-                  geometry
-                  amsmath
-                  fontspec
-                  unicode-math
-                  fancyvrb
-                  grffile
-                  hyperref
-                  booktabs
-                  soul
-                  ec
-                  ;
-              })
-            ]
-            ++ (with python311Packages; [
-              notebook
-              jupyter-console
-              jupyter-core
-              jupyterlab
-              jupyterlab-lsp
-              nbconvert
-            ])))
-          ++ (with self.packages.${system}; [
-            # ez
-            run
-            serv
-            list
-            stop
-          ]);
-
-        default = with pkgs;
-          mkShell {
-            inherit packages;
-            phases = [];
-            shellHook = '''';
-          };
-      in {
-        devShells = {inherit default;};
-
-        packages = rec {
-          run = pkgs.writeScriptBin "ijulia" ''
-            ${julia}/bin/julia -e '
-            using Pkg
-            Pkg.activate(".")
-            if !haskey(Pkg.project().dependencies, "IJulia")
-              Pkg.add("IJulia")
-            end
-            using IJulia
-            IJulia.jupyterlab(dir=pwd())
-            '
-          '';
-
-          serv = pkgs.writeScriptBin "serv" ''jupyter server $@'';
-          list = pkgs.writeScriptBin "list" ''jupyter server list'';
-          stop = pkgs.writeScriptBin "stop" ''jupyter server stop'';
-          default = run;
-        };
+          rec {
+            run = pkgs.writeScriptBin "ijulia" ''
+              ${julia}/bin/julia -e '
+              using Pkg
+              Pkg.activate(".")
+              if !haskey(Pkg.project().dependencies, "IJulia")
+                Pkg.add("IJulia")
+              end
+              using IJulia
+              IJulia.jupyterlab(dir=pwd())
+              '
+            '';
+            default = run;
+          }
+          // common.out-packages;
 
         apps = rec {
           run = {
