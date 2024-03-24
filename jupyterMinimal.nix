@@ -6,11 +6,11 @@
       jupyter-core
       jupyterlab
       jupyterlab-lsp
+      pynvim
     ];
 
   shell-packages =
-    (with pkgs; [
-      ])
+    (with pkgs; [])
     ++ (with out-packages; [
       serv
       list

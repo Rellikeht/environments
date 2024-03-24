@@ -1,5 +1,4 @@
-{pkgs}: let
-in rec {
+{pkgs}: {
   python-packages = ps:
     with ps; [
       bpython

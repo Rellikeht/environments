@@ -32,14 +32,6 @@
       in {
         packages.default = pkgs.pylyzer;
         devShells = {default = utils.defaultShell packages;};
-
-        # apps = rec {
-        #   run = {
-        #     type = "app";
-        #     program = "${self.packages.${system}.pylyzer}/bin/pylyzer";
-        #   };
-        #   default = run;
-        # };
       }
     );
 }

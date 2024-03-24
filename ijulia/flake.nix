@@ -18,13 +18,9 @@
         julia = pkgs.julia-bin;
         packages =
           common.shell-packages
-          ++ [
-            julia
-          ]
+          ++ [julia]
           ++ (common.python-packages pkgs.python311Packages)
-          ++ (with self.packages.${system}; [
-            run
-          ]);
+          ++ (with self.packages.${system}; [run]);
       in {
         devShells = {
           default = utils.defaultShell packages;

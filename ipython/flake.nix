@@ -12,11 +12,13 @@
     flakeUtils.lib.eachDefaultSystem (
       system: let
         pkgs = nixpkgs.legacyPackages.${system};
-        common = import ../jupyter.nix {inherit pkgs;};
+        common-jup = import ../jupyter.nix {inherit pkgs;};
         utils = import ../utils.nix {inherit pkgs;};
+        common-py = import ../python.nix {inherit pkgs;};
 
         python = pkgs.python311.withPackages (ps:
-          (common.python-packages ps)
+          (common-jup.python-packages ps)
+          ++ (common-py.python-packages ps)
           ++ (with ps; [
             ipykernel
             ipython
@@ -28,13 +30,11 @@
           ]));
 
         packages =
-          common.shell-packages
+          common-jup.shell-packages
+          ++ common-py.shell-packages
           ++ [python]
-          ++ (with self.packages.${system}; [
-            run
-          ])
-          ++ (with pkgs; [
-            ]);
+          ++ (with self.packages.${system}; [run])
+          ++ (with pkgs; []);
       in {
         devShells = {
           default = utils.defaultShell packages;
@@ -45,7 +45,7 @@
             run = pkgs.writeScriptBin "ipyrun" ''echo "TODO :<"'';
             default = run;
           }
-          // common.out-packages;
+          // common-jup.out-packages;
 
         apps = rec {
           run = {

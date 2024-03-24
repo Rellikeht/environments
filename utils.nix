@@ -1,4 +1,4 @@
-{pkgs}: rec {
+{pkgs}: {
   defaultShell = packages:
     pkgs.mkShell {
       inherit packages;
