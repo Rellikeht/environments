@@ -1,5 +1,20 @@
 {
   "nodes": {
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1659877975,
+        "narHash": "sha256-zllb8aq3YO3h8B/U0/J1WBgAL8EX5yWf5pMj3G0NAmc=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "c0e246b9b83f637f4681389ecabcb2681b4f3af0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "flakeUtils": {
       "inputs": {
         "systems": "systems"
@@ -18,13 +33,47 @@
         "type": "github"
       }
     },
+    "nix-gl": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1710868679,
+        "narHash": "sha256-V1o2bCZdeYKP/0zgVp4EN0KUjMItAMk6J7SvCXUI5IU=",
+        "owner": "nix-community",
+        "repo": "nixGL",
+        "rev": "d709a8abcde5b01db76ca794280745a43c8662be",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixGL",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1711273643,
-        "narHash": "sha256-6zgpFTCgAQTjChm8MlHv69qpLZFOf0KnOJUEw4PnOfQ=",
+        "lastModified": 1660551188,
+        "narHash": "sha256-a1LARMMYQ8DPx1BgoI/UN4bXe12hhZkCNqdxNi6uS0g=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "441dc5d512153039f19ef198e662e4f3dbb9fd65",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1711620227,
+        "narHash": "sha256-wXvCGNrPDtInXJ+5I1SAHJalZ778LG3ohH/sm86ylps=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "edeff1bd7d6adb42f66c1372b12078957eb23051",
+        "rev": "5e24981541dfd3453d5ef7ebee74ef9a8bc06df3",
         "type": "github"
       },
       "original": {
@@ -36,7 +85,8 @@
     "root": {
       "inputs": {
         "flakeUtils": "flakeUtils",
-        "nixpkgs": "nixpkgs"
+        "nix-gl": "nix-gl",
+        "nixpkgs": "nixpkgs_2"
       }
     },
     "systems": {
