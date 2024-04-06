@@ -42,7 +42,8 @@
 
         packages =
           rec {
-            run = pkgs.writeScriptBin "ipyrun" ''echo "TODO :<"'';
+            # ????
+            run = pkgs.writeScriptBin "ipyrun" ''exec jupyter-lab'';
             default = run;
           }
           // common-jup.out-packages;

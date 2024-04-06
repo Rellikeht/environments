@@ -34,7 +34,7 @@
           rec
           {
             ijulia-run = pkgs.writeScriptBin "ijulia" ''
-              julia -e '
+              exec julia -e '
                 using Pkg
                 Pkg.activate(".")
                 if !haskey(Pkg.project().dependencies, "IJulia")
