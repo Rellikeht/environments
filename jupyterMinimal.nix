@@ -6,7 +6,6 @@
       jupyter-core
       jupyterlab
       jupyterlab-lsp
-      pynvim
     ];
 
   shell-packages =

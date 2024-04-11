@@ -6,7 +6,10 @@ in
     python-packages = ps:
       with ps; (
         base.python-packages ps
-        ++ [nbconvert]
+        ++ [
+          nbconvert
+          pynvim
+        ]
       );
 
     shell-packages =
