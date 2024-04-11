@@ -36,13 +36,13 @@
             ijulia-run = pkgs.writeScriptBin "ijulia" ''
               exec julia -e '
                 using Pkg
-                Pkg.activate(".")
+                # Pkg.activate(".")
                 if !haskey(Pkg.project().dependencies, "IJulia")
                   Pkg.add("IJulia")
                 end
                 using IJulia
                 IJulia.jupyterlab(dir=pwd())
-              '
+              ' $@
             '';
             default = ijulia-run;
           }

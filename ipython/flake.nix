@@ -42,7 +42,6 @@
 
         packages =
           rec {
-            # ????
             run = pkgs.writeScriptBin "ipyrun" ''exec jupyter-lab'';
             default = run;
           }

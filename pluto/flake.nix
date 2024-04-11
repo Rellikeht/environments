@@ -31,9 +31,9 @@
 
         packages = rec {
           run = pkgs.writeScriptBin "pluto" ''
-            exec ${julia}/bin/julia -e '
+            exec julia -e '
             using Pkg
-            Pkg.activate(".")
+            # Pkg.activate(".")
             if !haskey(Pkg.project().dependencies, "Pluto")
               Pkg.add("Pluto")
             end
@@ -43,7 +43,7 @@
                 auto_reload_from_file=true,
                 launch_browser=false
             )
-            '
+            ' $@
           '';
           default = run;
         };
