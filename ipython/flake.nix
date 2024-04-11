@@ -35,25 +35,27 @@
           ++ [python]
           ++ (with self.packages.${system}; [run])
           ++ (with pkgs; []);
-      in {
-        devShells = {
-          default = utils.defaultShell packages;
-        };
-
-        packages =
-          rec {
-            run = pkgs.writeScriptBin "ipyrun" ''exec jupyter-lab'';
-            default = run;
-          }
-          // common-jup.out-packages;
-
-        apps = rec {
-          run = {
-            type = "app";
-            program = "${self.packages.${system}.run}/bin/ipyrun";
+      in
+        {
+          devShells = {
+            default = utils.defaultShell packages;
           };
-          default = run;
-        };
-      }
+
+          packages =
+            rec {
+              run = pkgs.writeScriptBin "ipyrun" ''exec jupyter-lab'';
+              default = run;
+            }
+            // common-jup.out-packages;
+
+          apps = rec {
+            run = {
+              type = "app";
+              program = "${self.packages.${system}.run}/bin/ipyrun";
+            };
+            default = run;
+          };
+        }
+        // {inherit utils;}
     );
 }
