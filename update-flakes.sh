@@ -1,7 +1,6 @@
 #!/usr/bin/env sh
 
 # TODO args
-find . -type d |
-    sed 1d |
+find . -maxdepth 1 -mindepth 1 -type d |
     grep -Ev '^\./\.git|pure-direnv' |
-    xargs -d '\n' -I{} nix flake update "{}"
+    xargs -d '\n' -I{} sh -c 'nix flake update "{}"'
