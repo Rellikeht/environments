@@ -1,6 +1,7 @@
 {pkgs}: rec {
   python-packages = ps:
     with ps; [
+      bpython # Because it gets broken when is not here
       notebook
       jupyter-console
       jupyter-core
