@@ -31,7 +31,7 @@
 
         packages = rec {
           run = pkgs.writeScriptBin "pluto" ''
-            exec julia -e '
+            exec julia --banner=no -O2 -g0 -e '
             using Pkg
             # Pkg.activate(".")
             if !haskey(Pkg.project().dependencies, "Pluto")
