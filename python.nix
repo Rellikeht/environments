@@ -11,6 +11,6 @@
 
   shell-packages = with pkgs; [
     ruff
-    # pylyzer
+    pylyzer
   ];
 }
