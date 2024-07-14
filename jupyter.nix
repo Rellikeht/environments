@@ -4,20 +4,24 @@ in
   with base; rec {
     inherit defaultShell;
     python-packages = ps:
+    # {{{
       with ps; (
         base.python-packages ps
         ++ [
+          # {{{
           nbconvert
           pynvim
-        ]
-      );
+        ] # }}}
+      ); # }}}
 
     shell-packages =
+      # {{{
       base.shell-packages
       ++ (with pkgs; [
         inkscape
         pandoc
         (texlive.combine {
+          # {{{
           inherit
             (pkgs.texlive)
             tcolorbox
@@ -58,9 +62,9 @@ in
             soul
             ec
             ;
-        })
+        }) # }}}
       ])
       ++ (with out-packages; []);
     out-packages =
-      {} // base.out-packages;
+      {} // base.out-packages; # }}}
   }
