@@ -20,13 +20,16 @@
       serv
       list
       stop
+      ipyrun
     ]); # }}}
   # }}}
 
-  out-packages = {
+  out-packages = rec {
     # {{{
     serv = pkgs.writeScriptBin "serv" ''jupyter server $@'';
     list = pkgs.writeScriptBin "list" ''jupyter server list'';
     stop = pkgs.writeScriptBin "stop" ''jupyter server stop'';
+    ipyrun = pkgs.writeScriptBin "ipyrun" ''exec jupyter-lab'';
+    default = ipyrun;
   }; # }}}
 }

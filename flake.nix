@@ -71,6 +71,8 @@
         pluto = ./pluto/default.nix;
         ijulia = ./ijulia/default.nix;
         nickel = ./nickel/default.nix;
+        ipython_minimal = ./ipython_minimal/default.nix;
+        ipython = ./ipython/default.nix;
       } #  }}}
     ));
 }
