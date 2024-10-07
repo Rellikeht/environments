@@ -1,4 +1,4 @@
-{pkgs}: let
+{pkgs ? import <nixpkgs> {}}: let
   base = import ./jupyterMinimal.nix {inherit pkgs;};
 in
   with base; rec {

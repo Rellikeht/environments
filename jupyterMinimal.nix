@@ -1,4 +1,4 @@
-{pkgs}: rec {
+{pkgs ? import <nixpkgs> {}}: rec {
   python-packages = ps:
     with ps; [
       # {{{

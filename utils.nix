@@ -1,4 +1,4 @@
-{pkgs}: {
+{pkgs ? import <nixpkgs> {}}: {
   defaultShell = packages:
     pkgs.mkShell {
       inherit packages;
