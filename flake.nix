@@ -73,6 +73,7 @@
         nickel = ./nickel/default.nix;
         ipython_minimal = ./ipython_minimal/default.nix;
         ipython = ./ipython/default.nix;
+        sysops = ./sysops/default.nix;
       } #  }}}
     ));
 }
