@@ -108,6 +108,7 @@
           additional = pkgs: {
             jupyter-packages = import ./jupyterMinimal.nix {inherit pkgs;};
             additional-packages = with pkgs; [];
+            python = pkgs.python311;
             additional-python = ps:
               with ps; [
                 matplotlib
