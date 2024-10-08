@@ -86,7 +86,22 @@
         ijulia = ./ijulia/default.nix;
         ipython_minimal = ./ipython/default.nix;
 
-        ipython = {
+        ipython_mindata = {
+          #  {{{
+          file = ./ipython/default.nix;
+          additional = pkgs: {
+            jupyter-packages = import ./jupyterMinimal.nix {inherit pkgs;};
+            additional-packages = with pkgs; [];
+            additional-python = ps:
+              with ps; [
+                matplotlib
+                numpy
+                pandas
+              ];
+          };
+        }; #  }}}
+
+        ipython_full = {
           #  {{{
           file = ./ipython/default.nix;
           additional = pkgs: {
@@ -119,22 +134,22 @@
           };
         }; #  }}}
 
-        ai-basics = {
-          # for labs on uni {{{
-          file = ./ipython/default.nix;
-          additional = pkgs: {
-            jupyter-packages = import ./jupyterMinimal.nix {inherit pkgs;};
-            additional-packages = with pkgs; [];
-            additional-python = ps:
-              with ps; [
-                matplotlib
-                numpy
-                scikit-learn
-                missingno
-                seaborn
-              ];
-          };
-        }; #  }}}
+        # ai-basics = {
+        #   # for labs on uni {{{
+        #   file = ./ipython/default.nix;
+        #   additional = pkgs: {
+        #     jupyter-packages = import ./jupyterMinimal.nix {inherit pkgs;};
+        #     additional-packages = with pkgs; [];
+        #     additional-python = ps:
+        #       with ps; [
+        #         matplotlib
+        #         numpy
+        #         scikit-learn
+        #         missingno
+        #         seaborn
+        #       ];
+        #   };
+        # }; #  }}}
 
         #
       } #  }}}
