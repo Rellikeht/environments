@@ -2,13 +2,10 @@
   #  {{{
   pkgs ? import <nixpkgs> {},
   utils ? import ../utils.nix {inherit pkgs;},
+  julia ? pkgs.julia-bin,
+  jupyter ? import ../jupyter.nix {inherit pkgs;},
   #  }}}
 }: let
-  #  {{{
-  common = import ../jupyter.nix {inherit pkgs;};
-  julia = pkgs.julia-bin;
-  #  }}}
-
   ijulia-run =
     pkgs.writeScriptBin "ijulia"
     # {{{
@@ -24,11 +21,11 @@
       ' $@
     ''; # }}}
 
-  shellPackages =
+  shell-Packages =
     # {{{
-    common.shell-packages
+    jupyter.shell-packages
     ++ [julia]
-    ++ (common.python-packages pkgs.python311Packages)
+    ++ (jupyter.python-packages pkgs.python311Packages)
     ++ [ijulia-run];
   # }}}
 in {
@@ -36,9 +33,9 @@ in {
 
   packages =
     {default = ijulia-run;}
-    // common.out-packages;
+    // jupyter.out-packages;
 
-  devShells = {default = utils.defaultShell shellPackages;};
+  devShells = {default = utils.defaultShell shell-Packages;};
 
   apps = {
     # {{{

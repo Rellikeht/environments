@@ -56,11 +56,22 @@
     }: system:
     #  {{{
     let
-      file = value;
+      file =
+        if b.typeOf value == "path"
+        then value
+        else value.file;
+      additional =
+        if b.typeOf value == "path"
+        then _: {}
+        else value.additional;
     in
-      rename name (import file {
+      rename name (import file (let
         pkgs = nixpkgs.legacyPackages.${system};
-      }); #  }}}
+      in
+        {
+          inherit pkgs;
+        }
+        // (additional pkgs))); #  }}}
   in
     b.foldl' lib.recursiveUpdate
     {}
@@ -71,8 +82,22 @@
         pluto = ./pluto/default.nix;
         ijulia = ./ijulia/default.nix;
         nickel = ./nickel/default.nix;
-        ipython_minimal = ./ipython_minimal/default.nix;
-        ipython = ./ipython/default.nix;
+        ipython_minimal = ./ipython/default.nix;
+        ipython = {
+          #  {{{
+          file = ./ipython/default.nix;
+          additional = pkgs: {
+            jupyter-packages = import ./jupyter.nix {inherit pkgs;};
+            additional-packages = with pkgs; [];
+            additional-python = ps:
+              with ps; [
+                matplotlib
+                numpy
+                pandas
+                # sympy
+              ];
+          };
+        }; #  }}}
         sysops = ./sysops/default.nix;
       } #  }}}
     ));

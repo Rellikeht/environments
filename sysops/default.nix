@@ -40,7 +40,7 @@
       zip
       unzip
 
-      bashinteractive
+      bashInteractive
     ]) # }}}
     ++ [sh];
 in {

@@ -2,7 +2,9 @@
   base = import ./jupyterMinimal.nix {inherit pkgs;};
 in
   with base; rec {
-    inherit defaultShell;
+    # inherit defaultShell;
+    inherit python;
+
     python-packages = ps:
     # {{{
       with ps; (
@@ -65,6 +67,7 @@ in
         }) # }}}
       ])
       ++ (with out-packages; []);
+
     out-packages =
       {} // base.out-packages; # }}}
   }

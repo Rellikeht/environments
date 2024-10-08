@@ -1,4 +1,6 @@
 {pkgs ? import <nixpkgs> {}}: rec {
+  python = pkgs.python312;
+
   python-packages = ps:
     with ps; [
       # {{{
@@ -10,6 +12,15 @@
       jupyterlab-lsp
     ]; # }}}
 
+  out-packages = rec {
+    # {{{
+    serv = pkgs.writeScriptBin "serv" ''jupyter server $@'';
+    list = pkgs.writeScriptBin "list" ''jupyter server list'';
+    stop = pkgs.writeScriptBin "stop" ''jupyter server stop'';
+    juprun = pkgs.writeScriptBin "juprun" ''exec jupyter-lab'';
+    default = juprun;
+  }; # }}}
+
   shell-packages =
     # {{{
     (with pkgs; [
@@ -20,16 +31,7 @@
       serv
       list
       stop
-      ipyrun
+      juprun
     ]); # }}}
   # }}}
-
-  out-packages = rec {
-    # {{{
-    serv = pkgs.writeScriptBin "serv" ''jupyter server $@'';
-    list = pkgs.writeScriptBin "list" ''jupyter server list'';
-    stop = pkgs.writeScriptBin "stop" ''jupyter server stop'';
-    ipyrun = pkgs.writeScriptBin "ipyrun" ''exec jupyter-lab'';
-    default = ipyrun;
-  }; # }}}
 }
