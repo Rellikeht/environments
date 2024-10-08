@@ -70,4 +70,8 @@ in
 
     out-packages =
       {} // base.out-packages; # }}}
+
+    shell-hook =
+      ''''
+      + base.shell-hook;
   }

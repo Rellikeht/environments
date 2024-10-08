@@ -114,6 +114,7 @@
                 matplotlib
                 numpy
                 opencv4
+                scikit-image
               ];
           };
         }; #  }}}

@@ -6,6 +6,7 @@
   additional-packages ? [],
   additional-python ? _: [],
   python ? jupyter-packages.python,
+  shellFunc ? utils.hookShell,
   #  }}}
 }: let
   #  {{{
@@ -30,7 +31,12 @@
     ++ additional-packages
     ++ (with pkgs; []); # }}}
 in {
-  devShells.default = utils.defaultShell shell-packages;
+  devShells.default =
+    shellFunc shell-packages
+    (
+      jupyter-packages.shell-hook
+      + ''''
+    );
   packages = jupyter-packages.out-packages;
 
   apps.default = {

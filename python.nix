@@ -3,11 +3,14 @@
     with ps; [
       #  {{{
       bpython
+      pynvim
       pip
+
       python-lsp-server
       mypy
       pylsp-mypy
-      pynvim
+
+      types-requests
     ]; #  }}}
 
   shell-packages = with pkgs; [

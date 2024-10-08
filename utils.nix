@@ -1,9 +1,10 @@
-{pkgs ? import <nixpkgs> {}}: {
-  defaultShell = packages:
+{pkgs ? import <nixpkgs> {}}: rec {
+  hookShell = packages: hook:
     pkgs.mkShell {
       inherit packages;
       phases = [];
-      shellHook = ''
-      '';
+      shellHook = hook;
     };
+
+  defaultShell = packages: hookShell packages "";
 }
