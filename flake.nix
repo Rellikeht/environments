@@ -79,10 +79,13 @@
       #  {{{
       lib.attrsToList
       {
+        nickel = ./nickel/default.nix;
+        sysops = ./sysops/default.nix; # for labs on uni
+
         pluto = ./pluto/default.nix;
         ijulia = ./ijulia/default.nix;
-        nickel = ./nickel/default.nix;
         ipython_minimal = ./ipython/default.nix;
+
         ipython = {
           #  {{{
           file = ./ipython/default.nix;
@@ -94,11 +97,44 @@
                 matplotlib
                 numpy
                 pandas
-                # sympy
+                sympy
               ];
           };
         }; #  }}}
-        sysops = ./sysops/default.nix;
+
+        digital-images = {
+          # for labs on uni {{{
+          file = ./ipython/default.nix;
+          additional = pkgs: {
+            jupyter-packages = import ./jupyterMinimal.nix {inherit pkgs;};
+            additional-packages = with pkgs; [];
+            additional-python = ps:
+              with ps; [
+                matplotlib
+                numpy
+                opencv4
+              ];
+          };
+        }; #  }}}
+
+        ai-basics = {
+          # for labs on uni {{{
+          file = ./ipython/default.nix;
+          additional = pkgs: {
+            jupyter-packages = import ./jupyterMinimal.nix {inherit pkgs;};
+            additional-packages = with pkgs; [];
+            additional-python = ps:
+              with ps; [
+                matplotlib
+                numpy
+                scikit-learn
+                missingno
+                seaborn
+              ];
+          };
+        }; #  }}}
+
+        #
       } #  }}}
     ));
 }

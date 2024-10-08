@@ -12,7 +12,6 @@ in
         ++ [
           # {{{
           nbconvert
-          pynvim
         ] # }}}
       ); # }}}
 
@@ -22,6 +21,7 @@ in
       ++ (with pkgs; [
         inkscape
         pandoc
+
         (texlive.combine {
           # {{{
           inherit
