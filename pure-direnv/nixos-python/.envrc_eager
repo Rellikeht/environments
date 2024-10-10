@@ -1,4 +1,6 @@
 source_up_if_exists
+# export DIRENV_LOG_FORMAT=''
+
 __OS="$(awk -F'=' '/^NAME=/ {print $2}' /etc/os-release 2>/dev/null)"
 __NIX_FILE="https://gitlab.com/Rellikeht/environments/-/raw/main/pure-direnv/nixos-python/nixos.shell.nix"
 if [ "$__OS" = "NixOS" ]; then
@@ -7,8 +9,8 @@ if [ "$__OS" = "NixOS" ]; then
     fi
     use nix nixos.shell.nix
 fi
-layout python3
 
+layout python3
 source .direnv/python-3*/bin/activate
-pip install --upgrade pip
-pip install -r requirements.txt
+# pip install --upgrade pip
+# pip install -r requirements.txt

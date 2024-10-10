@@ -1,3 +1,4 @@
 source_up_if_exists
+# export DIRENV_LOG_FORMAT=''
 layout julia
 use flake 'gitlab:Rellikeht/environments#ijulia'

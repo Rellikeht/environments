@@ -48,6 +48,5 @@
 
   shell-hook = ''
     # pip install jupyterlab-vim jupyterlab-execute-time
-    PYTHONPATH=\$PWD/.direnv/\${python.sitePackages}/:\$PYTHONPATH
   '';
 }

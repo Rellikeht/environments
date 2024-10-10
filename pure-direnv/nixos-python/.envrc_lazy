@@ -1,6 +1,4 @@
 source_up_if_exists
 layout python3
-
+source <(direnv apply_dump .envrc.cache)
 source .direnv/python-3*/bin/activate
-pip install --upgrade pip
-pip install -r requirements.txt

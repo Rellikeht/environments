@@ -1,0 +1,2 @@
+source_up_if_exists
+source <(direnv apply_dump .envrc.cache)
