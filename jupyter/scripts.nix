@@ -9,7 +9,7 @@ with pkgs; {
   stop =
     writeScriptBin "stop"
     ''exec jupyter server stop $@'';
-  juprun =
+  lab =
     writeScriptBin "lab"
     ''exec jupyter-lab --no-browser $@'';
 

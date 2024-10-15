@@ -1,6 +1,6 @@
 {
   pkgs ? import <nixpkgs> {},
-  utils ? import ../utils.nix {inherit pkgs;},
+  utils ? import ../utils/utils.nix {inherit pkgs;},
   scripts ? import ./scripts.nix {inherit pkgs;},
   shellFunc ? utils.hookShell,
 }: let
@@ -8,7 +8,7 @@
   b = builtins;
   #  }}}
 
-  default = scripts.juprun;
+  default = scripts.lab;
   out-packages =
     # {{{
     (b.removeAttrs scripts ["shell-hook"])
@@ -26,7 +26,7 @@
       serv
       list
       stop
-      juprun
+      lab
     ]); # }}}
   # }}}
 in {
@@ -41,6 +41,6 @@ in {
   apps.default = {
     #  {{{
     type = "app";
-    program = "${default}/bin/ipyrun";
+    program = "${default}/bin/lab";
   }; #  }}}
 }

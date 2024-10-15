@@ -25,7 +25,7 @@
     # {{{
     (b.removeAttrs scripts ["shell-hook"])
     // {
-      default = scripts.juprun;
+      default = scripts.lab;
     }; # }}}
 
   shell-packages =
@@ -38,13 +38,13 @@
       serv
       list
       stop
-      juprun
+      lab
     ]); # }}}
   # }}}
 
   shell-hook =
     #  {{{
     scripts.shell-hook
-    ++ ''
+    + ''
     ''; #  }}}
 }

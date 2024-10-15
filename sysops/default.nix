@@ -1,7 +1,7 @@
 {
   #  {{{
   pkgs ? import <nixpkgs> {},
-  utils ? import ../utils.nix {inherit pkgs;},
+  utils ? import ../utils/utils.nix {inherit pkgs;},
   #  }}}
 }: let
   # Magical workaround, no idea how good this will be

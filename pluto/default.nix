@@ -1,6 +1,6 @@
 {
   pkgs ? import <nixpkgs> {},
-  utils ? import ../utils.nix {inherit pkgs;},
+  utils ? import ../utils/utils.nix {inherit pkgs;},
 }: let
   julia = pkgs.julia-bin;
 

@@ -1,7 +1,7 @@
 {
   #  {{{
   pkgs ? import <nixpkgs> {},
-  utils ? import ../utils.nix {inherit pkgs;},
+  utils ? import ../utils/utils.nix {inherit pkgs;},
   jupyter-packages ? import ../jupyter/minimal.nix {inherit pkgs;},
   additional-packages ? [],
   additional-python ? _: [],
@@ -10,7 +10,7 @@
   #  }}}
 }: let
   #  {{{
-  common-py = import ../python.nix {inherit pkgs;};
+  common-py = import ../utils/python.nix {inherit pkgs;};
   #  }}}
 
   python-env =
@@ -37,6 +37,7 @@ in {
       jupyter-packages.shell-hook
       + ''''
     );
+
   packages = jupyter-packages.out-packages;
 
   apps.default = {

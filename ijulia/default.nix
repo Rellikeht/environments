@@ -1,7 +1,7 @@
 {
   #  {{{
   pkgs ? import <nixpkgs> {},
-  utils ? import ../utils.nix {inherit pkgs;},
+  utils ? import ../utils/utils.nix {inherit pkgs;},
   julia ? pkgs.julia-bin,
   jupyter ? import ../jupyter/utils.nix {inherit pkgs;},
   #  }}}
