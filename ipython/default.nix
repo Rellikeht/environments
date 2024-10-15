@@ -2,7 +2,7 @@
   #  {{{
   pkgs ? import <nixpkgs> {},
   utils ? import ../utils.nix {inherit pkgs;},
-  jupyter-packages ? import ../jupyterMinimal.nix {inherit pkgs;},
+  jupyter-packages ? import ../jupyter/minimal.nix {inherit pkgs;},
   additional-packages ? [],
   additional-python ? _: [],
   python ? jupyter-packages.python,

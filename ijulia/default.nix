@@ -3,7 +3,7 @@
   pkgs ? import <nixpkgs> {},
   utils ? import ../utils.nix {inherit pkgs;},
   julia ? pkgs.julia-bin,
-  jupyter ? import ../jupyter.nix {inherit pkgs;},
+  jupyter ? import ../jupyter/utils.nix {inherit pkgs;},
   #  }}}
 }: let
   ijulia-run =

@@ -19,7 +19,7 @@
           inherit system;
           overlays = [nix-gl.overlay];
         };
-        common = import ../jupyter.nix {inherit pkgs;};
+        common = import ../jupyter/utils.nix {inherit pkgs;};
         utils = import ../utils.nix {inherit pkgs;};
 
         julia = pkgs.julia-bin;

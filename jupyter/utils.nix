@@ -1,5 +1,5 @@
 {pkgs ? import <nixpkgs> {}}: let
-  base = import ./jupyterMinimal.nix {inherit pkgs;};
+  base = import ./minimal.nix {inherit pkgs;};
 in
   with base; rec {
     # inherit defaultShell;

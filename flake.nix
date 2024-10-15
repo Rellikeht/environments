@@ -83,14 +83,15 @@
         sysops = ./sysops/default.nix; # for labs on uni
 
         pluto = ./pluto/default.nix;
+        jupyter-scripts = ./jupyter/script-env.nix;
         ijulia = ./ijulia/default.nix;
-        ipython_minimal = ./ipython/default.nix;
+        ipython-minimal = ./ipython/default.nix;
 
-        ipython_mindata = {
+        ipython-mindata = {
           #  {{{
           file = ./ipython/default.nix;
           additional = pkgs: {
-            jupyter-packages = import ./jupyterMinimal.nix {inherit pkgs;};
+            jupyter-packages = import ./jupyter/minimal.nix {inherit pkgs;};
             additional-packages = with pkgs; [];
             additional-python = ps:
               with ps; [
@@ -101,11 +102,11 @@
           };
         }; #  }}}
 
-        ipython_full = {
+        ipython-full = {
           #  {{{
           file = ./ipython/default.nix;
           additional = pkgs: {
-            jupyter-packages = import ./jupyter.nix {inherit pkgs;};
+            jupyter-packages = import ./jupyter/utils.nix {inherit pkgs;};
             additional-packages = with pkgs; [];
             additional-python = ps:
               with ps; [
@@ -121,7 +122,7 @@
           # for labs on uni {{{
           file = ./ipython/default.nix;
           additional = pkgs: {
-            jupyter-packages = import ./jupyterMinimal.nix {inherit pkgs;};
+            jupyter-packages = import ./jupyter/minimal.nix {inherit pkgs;};
             additional-packages = with pkgs; [];
             python = pkgs.python311;
             additional-python = ps:
@@ -138,7 +139,7 @@
         #   # for labs on uni {{{
         #   file = ./ipython/default.nix;
         #   additional = pkgs: {
-        #     jupyter-packages = import ./jupyterMinimal.nix {inherit pkgs;};
+        #     jupyter-packages = import ./jupyter/minimal.nix {inherit pkgs;};
         #     additional-packages = with pkgs; [];
         #     additional-python = ps:
         #       with ps; [
