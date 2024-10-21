@@ -1,4 +1,4 @@
 source_up_if_exists
 # export DIRENV_LOG_FORMAT=''
-use flake 'gitlab:Rellikeht/environments#ipyhton'
+use flake 'gitlab:Rellikeht/environments#ipython'
 layout python3
