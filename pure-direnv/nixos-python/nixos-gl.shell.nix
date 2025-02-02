@@ -12,6 +12,6 @@ in
     inherit buildInputs;
     phases = [];
     shellHook = ''
-      LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${gl_drv_path}:${ld_path}"
+      export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${gl_drv_path}:${ld_path}"
     '';
   }

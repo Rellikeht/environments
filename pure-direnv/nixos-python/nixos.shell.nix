@@ -10,6 +10,6 @@ in
     inherit buildInputs;
     phases = [];
     shellHook = ''
-      LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${ld_path}"
+      export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${ld_path}"
     '';
   }
