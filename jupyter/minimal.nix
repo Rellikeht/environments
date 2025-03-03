@@ -5,6 +5,7 @@
   #  {{{
   b = builtins;
   python = pkgs.python312;
+  pythonPackages = pkgs.python312Packages;
   #  }}}
 
   python-packages = ps:

@@ -25,7 +25,7 @@
     # {{{
     jupyter.shell-packages
     ++ [julia]
-    ++ (jupyter.python-packages pkgs.python311Packages)
+    ++ (jupyter.python-packages jupyter.pythonPackages)
     ++ [ijulia-run];
   # }}}
 in {

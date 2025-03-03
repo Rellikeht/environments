@@ -31,7 +31,7 @@
             nixGLIntel
           ])
           ++ []
-          ++ (common.python-packages pkgs.python311Packages)
+          ++ (common.python-packages pkgs.python312Packages)
           ++ (with self.packages.${system}; [
             ijulia-run
             julia-run

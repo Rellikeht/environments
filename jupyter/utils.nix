@@ -3,7 +3,7 @@
 in
   with base; rec {
     # inherit defaultShell;
-    inherit python;
+    inherit python pythonPackages;
 
     python-packages = ps:
     # {{{
