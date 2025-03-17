@@ -4,7 +4,7 @@
       #  {{{
       bpython
       pynvim
-      pip
+      uv
 
       python-lsp-server
       mypy

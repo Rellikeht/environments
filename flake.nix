@@ -80,7 +80,6 @@
       lib.attrsToList
       {
         nickel = ./nickel/default.nix;
-        sysops = ./sysops/default.nix; # for labs on uni
 
         pluto = ./pluto/default.nix;
         jupyter-scripts = ./jupyter/script-env.nix;
@@ -134,23 +133,6 @@
               ];
           };
         }; #  }}}
-
-        # ai-basics = {
-        #   # for labs on uni {{{
-        #   file = ./ipython/default.nix;
-        #   additional = pkgs: {
-        #     jupyter-packages = import ./jupyter/minimal.nix {inherit pkgs;};
-        #     additional-packages = with pkgs; [];
-        #     additional-python = ps:
-        #       with ps; [
-        #         matplotlib
-        #         numpy
-        #         scikit-learn
-        #         missingno
-        #         seaborn
-        #       ];
-        #   };
-        # }; #  }}}
 
         #
       } #  }}}

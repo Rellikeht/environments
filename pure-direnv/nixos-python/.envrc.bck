@@ -7,5 +7,5 @@ fi
 
 layout python3
 source .direnv/python-3*/bin/activate
-pip install --upgrade pip
-pip install -r requirements.txt
+# pip install --upgrade pip
+uv install -r requirements.txt

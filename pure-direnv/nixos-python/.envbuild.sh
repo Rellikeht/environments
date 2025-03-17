@@ -8,8 +8,8 @@ if [ "$__OS" = "NixOS" ]; then
     fi
 fi
 
-pip install --upgrade pip
-pip install -r requirements.txt
+# pip install --upgrade pip
+uv install -r requirements.txt
 
 # export DIRENV_LOG_FORMAT=''
 direnv dump >.envrc.cache

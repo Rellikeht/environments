@@ -14,6 +14,6 @@ with pkgs; {
     ''exec jupyter-lab --no-browser $@'';
 
   shell-hook = ''
-    # pip install jupyterlab-vim jupyterlab-execute-time
+    # uv install jupyterlab-vim jupyterlab-execute-time
   '';
 }
