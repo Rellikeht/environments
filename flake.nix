@@ -80,6 +80,8 @@
       lib.attrsToList
       {
         nickel = ./nickel/default.nix;
+        arduino = ./arduino/default.nix;
+        arduino-latest = ./arduino-latest/default.nix;
 
         pluto = ./pluto/default.nix;
         jupyter-scripts = ./jupyter/script-env.nix;
