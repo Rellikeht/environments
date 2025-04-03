@@ -5,6 +5,7 @@
         arduino-cli
         arduino-language-server
         clang-tools
+        picocom
       ];
       shellHook = ''
       '';

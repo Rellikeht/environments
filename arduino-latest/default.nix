@@ -4,6 +4,7 @@
       buildInputs = with pkgs; [
         arduino-cli
         clang-tools
+        picocom
 
         go
         (pkgs.writeScriptBin "arduino-ls-install" ''

@@ -1,9 +1,10 @@
 {pkgs ? import <nixpkgs> {}}: let
   buildInputs = with pkgs; [
     zlib
-    pkgs.stdenv.cc.cc.lib
+    stdenv.cc.cc.lib
     glib
   ];
+
   ld_path = "${pkgs.lib.makeLibraryPath buildInputs}";
 in
   pkgs.mkShell {
