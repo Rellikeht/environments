@@ -12,6 +12,8 @@
               go install github.com/arduino/arduino-language-server@latest
           fi
         '')
+
+        python3Minimal
       ];
 
       shellHook = ''

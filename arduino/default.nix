@@ -6,6 +6,8 @@
         arduino-language-server
         clang-tools
         picocom
+
+        python3Minimal
       ];
       shellHook = ''
       '';
