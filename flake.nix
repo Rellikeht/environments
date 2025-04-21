@@ -1,7 +1,7 @@
 {
   inputs = {
     # {{{
-    nixpkgs.url = "github:NixOS/nixpkgs";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flakeUtils.url = "github:numtide/flake-utils";
   }; # }}}
 
@@ -80,6 +80,7 @@
       lib.attrsToList
       {
         nickel = ./nickel/default.nix;
+        dhall = ./dhall/default.nix;
         arduino = ./arduino/default.nix;
         arduino-latest = ./arduino-latest/default.nix;
 
