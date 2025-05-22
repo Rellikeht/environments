@@ -43,6 +43,6 @@ in {
   apps.default = {
     #  {{{
     type = "app";
-    program = "${jupyter-packages.out-packages.ipyrun}/bin/ipyrun";
+    program = "${jupyter-packages.out-packages.lab}/bin/lab";
   }; #  }}}
 }

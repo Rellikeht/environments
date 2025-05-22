@@ -3,9 +3,6 @@
     default = pkgs.mkShell {
       buildInputs = with pkgs;
         [
-          (dhall.withPackages [
-            dhall-grafana
-          ])
           dhall-lsp-server
 
           dhall-nixpkgs
@@ -19,7 +16,6 @@
         ++ (
           with haskellPackages; [
             dhall-toml
-            dhall-to-cabal
           ]
           # TODO what to do with that shit
           # ++ (

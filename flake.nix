@@ -88,6 +88,7 @@
         jupyter-scripts = ./jupyter/script-env.nix;
         ijulia = ./ijulia/default.nix;
         ipython-minimal = ./ipython/default.nix;
+        nixos-python = ./nixos-python/default.nix;
 
         ipython-mindata = {
           #  {{{
