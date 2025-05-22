@@ -1,0 +1,12 @@
+ipykernel
+jupyterlab
+jupyterlab-vim
+jupyterlab-lsp
+jupyterlab-execute-time
+jupyterlab-ipywidgets
+
+ruff
+python-lsp-server
+python-lsp-ruff
+pylsp-mypy
+mypy

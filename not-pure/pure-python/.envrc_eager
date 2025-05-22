@@ -2,5 +2,4 @@ source_up_if_exists
 # export DIRENV_LOG_FORMAT=''
 layout python3
 source .direnv/python-3*/bin/activate
-# pip install --upgrade pip
-# pip install -r requirements.txt
+uv pip install -U -r requirements.txt
