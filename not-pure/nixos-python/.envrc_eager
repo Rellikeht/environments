@@ -12,3 +12,4 @@ fi
 
 layout python3
 source .direnv/python-3*/bin/activate
+uv pip install -U -r requirements.txt
