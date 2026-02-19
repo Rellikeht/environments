@@ -11,7 +11,7 @@
   mlibs = with pkgs; [
     # for matplotlib to fucking work
     fontconfig
-    xorg.libX11
+    libX11
     libxkbcommon
     freetype
     dbus

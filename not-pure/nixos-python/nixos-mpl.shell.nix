@@ -9,7 +9,7 @@
 
     # for matplotlib
     fontconfig
-    xorg.libX11
+    libX11
     libxkbcommon
     freetype
     dbus
