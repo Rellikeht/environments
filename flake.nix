@@ -83,6 +83,7 @@
         dhall = ./dhall/default.nix;
         arduino = ./arduino/default.nix;
         arduino-latest = ./arduino-latest/default.nix;
+        pico-sdk = ./pico-sdk/default.nix;
 
         pluto = ./pluto/default.nix;
         jupyter-scripts = ./jupyter/script-env.nix;
